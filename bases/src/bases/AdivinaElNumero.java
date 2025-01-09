@@ -10,22 +10,22 @@ public class AdivinaElNumero {
 		String seguir;
 		
 		do {
-			int pensado = new Random().nextInt(1, 100);
+			int pensado = new Random().nextInt(1, 101);
 			
-			System.out.println(pensado);
+//			System.out.println(pensado);
 			
 			int numero;
 			do {
 				System.out.print("Dime un número: ");
 
 				numero = sc.nextInt();
-				sc.nextLine();
+				sc.nextLine(); // Para limpiar el enter que queda detrás del número
 
 				if (pensado > numero) {
 					System.out.println("Es mayor");
 				} else if (pensado < numero) {
 					System.out.println("Es menor");
-				} else if (numero == pensado) {
+				} else {
 					System.out.println("Has acertado");
 				}
 			} while (pensado != numero);
@@ -36,6 +36,5 @@ public class AdivinaElNumero {
 		} while (seguir.equals("s"));
 		
 		System.out.println("Gracias por jugar");
-
 	}
 }
