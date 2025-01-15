@@ -9,7 +9,11 @@ public class Condicionales {
 		System.out.println("Dime un número");
 
 		int numeroElegido = sc.nextInt();
+		
+		sc.close();
 
+		sc = null;
+		
 		if (numeroElegido > 5) {
 			System.out.println("Es mayor que 5");
 		} else if (numeroElegido < 5) {
@@ -28,5 +32,6 @@ public class Condicionales {
 		default:
 			System.out.println("Otro número");
 		}
+		
 	}
 }

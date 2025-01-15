@@ -20,6 +20,8 @@ public class Funciones {
 		repetir(numero);
 		
 		System.out.println(sumar(3, 4));
+		
+		sc.close();
 	}
 
 	private static int sumar(int a, int b) {

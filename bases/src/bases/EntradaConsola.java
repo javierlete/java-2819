@@ -23,5 +23,7 @@ public class EntradaConsola {
 		int suma = num1 + num2;
 		
 		System.out.println("La suma es " + suma);
+		
+		sc.close();
 	}
 }
