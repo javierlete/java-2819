@@ -1,15 +1,13 @@
 package ejemplos;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
+import poo.Consola;
 import poo.Monitor;
 
 public class MantenimientoMonitores {
 	private static int contadorId = 4;
 	
-	private static final Scanner sc = new Scanner(System.in);
-
 	private static final ArrayList<Monitor> monitores = new ArrayList<Monitor>();
 
 	public static void main(String[] args) {
@@ -49,12 +47,7 @@ public class MantenimientoMonitores {
 	}
 
 	private static int pedirOpcion() {
-		System.out.print("Dime la opción que deseas: ");
-
-		int resultado = sc.nextInt();
-		sc.nextLine();
-		
-		return resultado;
+		return Consola.pedirEntero("Dime la opción que deseas");
 	}
 
 	private static void procesar(int opcion) {
@@ -90,8 +83,7 @@ public class MantenimientoMonitores {
 	}
 
 	private static void buscar() {
-		System.out.print("Dime qué color quieres buscar: ");
-		String color = sc.nextLine();
+		String color = Consola.pedirTexto("Dime qué color quieres buscar");
 
 		mostrarCabecera();
 		for (Monitor monitor : monitores) {
@@ -109,9 +101,7 @@ public class MantenimientoMonitores {
 	}
 
 	private static void modificar() {
-		System.out.print("Dime el id a modificar: ");
-		int id = sc.nextInt();
-		sc.nextLine();
+		int id = Consola.pedirEntero("Dime el id a modificar");
 		
 		Monitor m = pedirDatosMonitor(id);
 		
@@ -128,9 +118,7 @@ public class MantenimientoMonitores {
 	}
 
 	private static void borrar() {
-		System.out.print("Dime el id a borrar: ");
-		int id = sc.nextInt();
-		sc.nextLine();
+		int id = Consola.pedirEntero("Dime el id a borrar");
 		
 		for(Monitor monitor: monitores) {
 			if(monitor.getId() == id) {
@@ -150,18 +138,10 @@ public class MantenimientoMonitores {
 	}
 
 	private static Monitor pedirDatosMonitor(int id) {
-		System.out.print("Ancho: ");
-		int ancho = sc.nextInt();
-		
-		System.out.print("Alto: ");
-		int alto = sc.nextInt();
-		
-		System.out.print("Pulgadas: ");
-		int pulgadas = sc.nextInt();
-		sc.nextLine();
-		
-		System.out.print("Color: ");
-		String color = sc.nextLine();
+		int ancho = Consola.pedirEntero("Ancho");
+		int alto = Consola.pedirEntero("Alto");
+		int pulgadas = Consola.pedirEntero("Pulgadas");
+		String color = Consola.pedirTexto("Color");
 		
 		Monitor m = new Monitor(id, ancho, alto, pulgadas, color);
 		return m;
