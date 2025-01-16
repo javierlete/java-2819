@@ -2,7 +2,7 @@ package ejemplos;
 
 import java.util.ArrayList;
 
-import poo.Consola;
+import static poo.Consola.*;
 import poo.Monitor;
 
 public class MantenimientoMonitores {
@@ -47,7 +47,7 @@ public class MantenimientoMonitores {
 	}
 
 	private static int pedirOpcion() {
-		return Consola.pedirEntero("Dime la opción que deseas");
+		return pedirEntero("Dime la opción que deseas");
 	}
 
 	private static void procesar(int opcion) {
@@ -83,7 +83,7 @@ public class MantenimientoMonitores {
 	}
 
 	private static void buscar() {
-		String color = Consola.pedirTexto("Dime qué color quieres buscar");
+		String color = pedirTexto("Dime qué color quieres buscar");
 
 		mostrarCabecera();
 		for (Monitor monitor : monitores) {
@@ -101,7 +101,7 @@ public class MantenimientoMonitores {
 	}
 
 	private static void modificar() {
-		int id = Consola.pedirEntero("Dime el id a modificar");
+		int id = pedirEntero("Dime el id a modificar");
 		
 		Monitor m = pedirDatosMonitor(id);
 		
@@ -118,7 +118,7 @@ public class MantenimientoMonitores {
 	}
 
 	private static void borrar() {
-		int id = Consola.pedirEntero("Dime el id a borrar");
+		int id = pedirEntero("Dime el id a borrar");
 		
 		for(Monitor monitor: monitores) {
 			if(monitor.getId() == id) {
@@ -138,10 +138,10 @@ public class MantenimientoMonitores {
 	}
 
 	private static Monitor pedirDatosMonitor(int id) {
-		int ancho = Consola.pedirEntero("Ancho");
-		int alto = Consola.pedirEntero("Alto");
-		int pulgadas = Consola.pedirEntero("Pulgadas");
-		String color = Consola.pedirTexto("Color");
+		int ancho = pedirEntero("Ancho");
+		int alto = pedirEntero("Alto");
+		int pulgadas = pedirEntero("Pulgadas");
+		String color = pedirTexto("Color");
 		
 		Monitor m = new Monitor(id, ancho, alto, pulgadas, color);
 		return m;
