@@ -1,12 +1,23 @@
 package poo;
 
 public class Monitor {
+	private Integer id;
+	
 	private int ancho;
 	private int alto;
 
 	private int diagonal;
 	
 	private String color;
+
+	public Monitor(Integer id, int ancho, int alto, int diagonal, String color) {
+		super();
+		this.id = id;
+		this.ancho = ancho;
+		this.alto = alto;
+		this.diagonal = diagonal;
+		this.color = color;
+	}
 
 	public Monitor(int ancho, int alto, int diagonal, String color) {
 		super();
@@ -18,6 +29,14 @@ public class Monitor {
 	
 	public Monitor() {
 		
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public int getAncho() {
@@ -62,6 +81,7 @@ public class Monitor {
 
 	@Override
 	public String toString() {
-		return "Monitor [ancho=" + ancho + ", alto=" + alto + ", diagonal=" + diagonal + ", color=" + color + "]";
+		return "Monitor [id=" + id + ", ancho=" + ancho + ", alto=" + alto + ", diagonal=" + diagonal + ", color="
+				+ color + "]";
 	}
 }
