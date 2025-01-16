@@ -6,15 +6,17 @@ import java.util.Scanner;
 import poo.Monitor;
 
 public class MantenimientoMonitores {
+	private static int contadorId = 4;
+	
 	private static final Scanner sc = new Scanner(System.in);
 
 	private static final ArrayList<Monitor> monitores = new ArrayList<Monitor>();
 
 	public static void main(String[] args) {
 		// Introducimos datos de prueba
-		monitores.add(new Monitor(640, 480, 12, "Negro"));
-		monitores.add(new Monitor(1200, 1024, 15, "Gris"));
-		monitores.add(new Monitor(1920, 1080, 20, "Rojo"));
+		monitores.add(new Monitor(1, 640, 480, 12, "Negro"));
+		monitores.add(new Monitor(2, 1200, 1024, 15, "Gris"));
+		monitores.add(new Monitor(3, 1920, 1080, 20, "Rojo"));
 
 		boolean salir = true;
 
@@ -88,11 +90,11 @@ public class MantenimientoMonitores {
 	}
 
 	private static void mostrarCabecera() {
-		System.out.printf("%5s %5s %8s %-20s\n", "Ancho", "Alto", "Diagonal", "Color");
+		System.out.printf("%5s %5s %5s %8s %-20s\n", "Id", "Ancho", "Alto", "Diagonal", "Color");
 	}
 
 	private static void mostrarLinea(Monitor monitor) {
-		System.out.printf("%5s %5s %5s    %-20s\n", monitor.getAncho(), monitor.getAlto(), monitor.getDiagonal(),
+		System.out.printf("%5s %5s %5s %5s    %-20s\n", monitor.getId(), monitor.getAncho(), monitor.getAlto(), monitor.getDiagonal(),
 				monitor.getColor());
 	}
 
@@ -122,20 +124,57 @@ public class MantenimientoMonitores {
 		System.out.print("Color: ");
 		String color = sc.nextLine();
 		
-		Monitor m = new Monitor(ancho, alto, pulgadas, color);
+		Monitor m = new Monitor(contadorId, ancho, alto, pulgadas, color);
+		
+		contadorId++;
 		
 		monitores.add(m);
 	}
 
 	private static void modificar() {
-		// TODO Auto-generated method stub
-
+		System.out.print("Dime el id a modificar: ");
+		int id = sc.nextInt();
+		sc.nextLine();
+		
+		System.out.print("Ancho: ");
+		int ancho = sc.nextInt();
+		
+		System.out.print("Alto: ");
+		int alto = sc.nextInt();
+		
+		System.out.print("Pulgadas: ");
+		int pulgadas = sc.nextInt();
+		sc.nextLine();
+		
+		System.out.print("Color: ");
+		String color = sc.nextLine();
+		
+		Monitor m = new Monitor(id, ancho, alto, pulgadas, color);
+		
+		int contador = 0;
+		
+		for(Monitor monitor: monitores) {
+			if(monitor.getId() == id) {
+				monitores.set(contador, m);
+				break;
+			}
+			
+			contador++;
+		}
+		
 		// monitores.set(0, m);
 	}
 
 	private static void borrar() {
-		// TODO Auto-generated method stub
-
-		// monitores.remove(0);
+		System.out.print("Dime el id a borrar: ");
+		int id = sc.nextInt();
+		sc.nextLine();
+		
+		for(Monitor monitor: monitores) {
+			if(monitor.getId() == id) {
+				monitores.remove(monitor);
+				break;
+			}
+		}
 	}
 }
