@@ -31,7 +31,7 @@ public class MantenimientoMonitores {
 	}
 
 	private static void mostrarMenu() {
-		System.out.println("""
+		pl("""
 				MENU
 				====
 
@@ -68,10 +68,10 @@ public class MantenimientoMonitores {
 			borrar();
 			break;
 		case 0:
-			System.out.println("Gracias por usar la aplicación");
+			pl("Gracias por usar la aplicación");
 			break;
 		default:
-			System.out.println("Opción no reconocida");
+			pl("Opción no reconocida");
 		}
 	}
 
@@ -129,11 +129,11 @@ public class MantenimientoMonitores {
 	}
 
 	private static void mostrarCabecera() {
-		System.out.printf("%5s %5s %5s %8s %-20s\n", "Id", "Ancho", "Alto", "Diagonal", "Color");
+		pf("%5s %5s %5s %8s %-20s\n", "Id", "Ancho", "Alto", "Diagonal", "Color");
 	}
 
 	private static void mostrarLinea(Monitor monitor) {
-		System.out.printf("%5s %5s %5s %5s    %-20s\n", monitor.getId(), monitor.getAncho(), monitor.getAlto(), monitor.getDiagonal(),
+		pf("%5s %5s %5s %5s    %-20s\n", monitor.getId(), monitor.getAncho(), monitor.getAlto(), monitor.getDiagonal(),
 				monitor.getColor());
 	}
 
@@ -143,7 +143,6 @@ public class MantenimientoMonitores {
 		int pulgadas = pedirEntero("Pulgadas");
 		String color = pedirTexto("Color");
 		
-		Monitor m = new Monitor(id, ancho, alto, pulgadas, color);
-		return m;
+		return new Monitor(id, ancho, alto, pulgadas, color);
 	}
 }
