@@ -40,22 +40,25 @@ public class MantenimientoMonitoresJdbc {
 
 	private static Statement st;
 
-	public static void main(String[] args) throws SQLException {
-		Connection con = DriverManager.getConnection(URL);
-		st = con.createStatement();
+	public static void main(String[] args) {
+		try (Connection con = DriverManager.getConnection(URL)) {
+			st = con.createStatement();
 
-		boolean salir = true;
+			boolean salir = true;
 
-		do {
-			// Mostrar un menú
-			mostrarMenu();
-			// Pedir una opción
-			int opcion = pedirOpcion();
-			// Procesar opción
-			procesar(opcion);
-			// Si no me han dicho salir, repetir desde "Mostrar un menú"
-			salir = opcion == 0;
-		} while (!salir);
+			do {
+				// Mostrar un menú
+				mostrarMenu();
+				// Pedir una opción
+				int opcion = pedirOpcion();
+				// Procesar opción
+				procesar(opcion);
+				// Si no me han dicho salir, repetir desde "Mostrar un menú"
+				salir = opcion == 0;
+			} while (!salir);
+		} catch (SQLException e) {
+			System.out.println("Ha habido un error en la base de datos");
+		}
 	}
 
 	private static void mostrarMenu() {
@@ -103,18 +106,21 @@ public class MantenimientoMonitoresJdbc {
 		}
 	}
 
-	private static void listado() throws SQLException {
+	private static void listado() {
 		mostrarCabecera();
 
-		ResultSet rs = st.executeQuery(SQL_SELECT);
-
 		ArrayList<Monitor> monitores = new ArrayList<Monitor>();
+		
+		try (ResultSet rs = st.executeQuery(SQL_SELECT)) {
+			while (rs.next()) {
+				Monitor monitor = new Monitor(rs.getInt("id"), rs.getInt("ancho"), rs.getInt("alto"), rs.getInt("diagonal"),
+						rs.getString("color"));
 
-		while (rs.next()) {
-			Monitor monitor = new Monitor(rs.getInt("id"), rs.getInt("ancho"), rs.getInt("alto"), rs.getInt("diagonal"),
-					rs.getString("color"));
+				monitores.add(monitor);
+			}
 
-			monitores.add(monitor);
+		} catch (SQLException e) {
+			System.out.println("No se ha podido obtener el listado");
 		}
 
 		for (Monitor monitor : monitores) {
@@ -146,8 +152,9 @@ public class MantenimientoMonitoresJdbc {
 
 	private static void insertar() throws SQLException {
 		Monitor monitor = pedirDatosMonitor(null);
-		
-		String sqlInsert = String.format(SQL_INSERT_PLANTILLA,  monitor.getAncho(), monitor.getAlto(), monitor.getDiagonal(), monitor.getColor());
+
+		String sqlInsert = String.format(SQL_INSERT_PLANTILLA, monitor.getAncho(), monitor.getAlto(),
+				monitor.getDiagonal(), monitor.getColor());
 
 		st.executeUpdate(sqlInsert);
 	}
@@ -157,7 +164,8 @@ public class MantenimientoMonitoresJdbc {
 
 		Monitor monitor = pedirDatosMonitor(id);
 
-		String sqlUpdate = String.format(SQL_UPDATE_PLANTILLA,  monitor.getAncho(), monitor.getAlto(), monitor.getDiagonal(), monitor.getColor(), monitor.getId());
+		String sqlUpdate = String.format(SQL_UPDATE_PLANTILLA, monitor.getAncho(), monitor.getAlto(),
+				monitor.getDiagonal(), monitor.getColor(), monitor.getId());
 
 		st.executeUpdate(sqlUpdate);
 	}
@@ -176,13 +184,13 @@ public class MantenimientoMonitoresJdbc {
 		pf("%5s %5s %5s %5s    %-20s\n", monitor.getId(), monitor.getAncho(), monitor.getAlto(), monitor.getDiagonal(),
 				monitor.getColor());
 	}
-	
+
 	private static Monitor pedirDatosMonitor(Integer id) {
 		int ancho = pedirEntero("Ancho");
 		int alto = pedirEntero("Alto");
 		int pulgadas = pedirEntero("Pulgadas");
 		String color = pedirTexto("Color");
-		
+
 		return new Monitor(id, ancho, alto, pulgadas, color);
 	}
 }
