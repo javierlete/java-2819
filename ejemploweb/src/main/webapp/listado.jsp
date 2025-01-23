@@ -23,6 +23,9 @@ ResultSet rs = st.executeQuery(sql);
 <head>
 <meta charset="UTF-8">
 <title>Listado</title>
+
+<link rel="stylesheet" href="css/listado.css">
+
 </head>
 <body>
 

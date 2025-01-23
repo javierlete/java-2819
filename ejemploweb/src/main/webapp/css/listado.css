@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: sans-serif;
+}
+
+form {
+	margin: 1rem 0;
+}
+
+input {
+	display: inline-block;
+	width: 100%;
+}
+
+input, button {
+	border: 1px solid lightgray;
+	border-radius: 0.25rem;
+	
+	padding: 0.25rem;
+	
+	margin: 0.25rem 0;
+}
+
+table {
+	width: 100%;
+	
+	border-collapse: collapse;
+}
+
+thead {
+	color: white;
+	background-color: darkgray;
+}
+
+th, td {
+	text-align: start;
+	
+	border: 1px solid lightgray;
+
+	padding: 0.25rem;
+
+}
+
