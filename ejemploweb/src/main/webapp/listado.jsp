@@ -8,15 +8,28 @@ String url = "jdbc:sqlite:monitores.sqlite";
 
 String sql = "SELECT * FROM monitores";
 
+Connection con = DriverManager.getConnection(url);
+Statement st = con.createStatement();
+
+String id = request.getParameter("id");
 String color = request.getParameter("color");
+
+ResultSet rs = null;
 
 if (color != null && !color.isBlank()) {
 	sql += " WHERE color LIKE '%" + color + "%'";
+	rs = st.executeQuery(sql);
+} else if (id != null) {
+	sql = "DELETE FROM monitores WHERE id=" + id;
+	
+	st.executeUpdate(sql);
+	
+	response.sendRedirect("listado.jsp");
+	
+	return;
+} else {
+	rs = st.executeQuery(sql);
 }
-
-Connection con = DriverManager.getConnection(url);
-Statement st = con.createStatement();
-ResultSet rs = st.executeQuery(sql);
 %>
 <!DOCTYPE html>
 <html>
@@ -46,6 +59,7 @@ ResultSet rs = st.executeQuery(sql);
 				<th>Alto</th>
 				<th>Diagonal</th>
 				<th>Color</th>
+				<th>OPCIONES</th>
 			</tr>
 		</thead>
 
@@ -59,11 +73,25 @@ ResultSet rs = st.executeQuery(sql);
 				<td><%=rs.getString("alto")%></td>
 				<td><%=rs.getString("diagonal")%></td>
 				<td><%=rs.getString("color")%></td>
+				<td><a href="formulario.jsp?id=<%=rs.getString("id")%>">Editar</a>
+					<a href="listado.jsp?id=<%=rs.getString("id")%>">Borrar</a></td>
 			</tr>
 			<%
 			}
+
+			rs.close();
+			st.close();
+			con.close();
 			%>
 		</tbody>
+
+		<tfoot>
+			<tr>
+				<td colspan="5"></td>
+
+				<td><a href="formulario.jsp">Añadir</a></td>
+			</tr>
+		</tfoot>
 	</table>
 
 </body>
