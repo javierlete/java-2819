@@ -29,30 +29,34 @@ Producto producto = (Producto) request.getAttribute("producto");
 	<h1 class="display-1">Listado Administración</h1>
 
 	<p><%=producto%></p>
-	
+
 	<form>
 		<div class="row mb-3">
 			<label for="id" class="col-sm-2 col-form-label">Id</label>
 			<div class="col-sm-10">
-				<input type="number" class="form-control" id="id" value="<%=producto.getId()%>">
+				<input type="number" class="form-control" id="id"
+					value="<%=producto == null ? "" : producto.getId()%>">
 			</div>
 		</div>
 		<div class="row mb-3">
 			<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="nombre" value="<%=producto.getNombre()%>">
+				<input type="text" class="form-control" id="nombre"
+					value="<%=producto == null ? "" : producto.getNombre()%>">
 			</div>
 		</div>
 		<div class="row mb-3">
 			<label for="precio" class="col-sm-2 col-form-label">Precio</label>
 			<div class="col-sm-10">
-				<input type="number" step=".01" class="form-control" id="precio" value="<%=producto.getPrecio()%>">
+				<input type="number" step=".01" class="form-control" id="precio"
+					value="<%=producto == null ? "" : producto.getPrecio()%>">
 			</div>
 		</div>
 		<div class="row mb-3">
 			<label for="descuento" class="col-sm-2 col-form-label">Descuento</label>
 			<div class="col-sm-10">
-				<input type="number" step=".1" class="form-control" id="descuento" value="<%=producto.getDescuento()%>">
+				<input type="number" step=".1" class="form-control" id="descuento"
+					value="<%=producto == null ? "" : producto.getDescuento()%>">
 			</div>
 		</div>
 
