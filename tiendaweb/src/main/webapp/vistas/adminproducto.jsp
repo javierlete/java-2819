@@ -29,48 +29,33 @@ ArrayList<Producto> productos = (ArrayList<Producto>) request.getAttribute("prod
 
 	<h1 class="display-1">Listado Administración</h1>
 
-	<table class="table table-striped table-bordered table-hover">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Nombre</th>
-				<th>Precio</th>
-				<th>Descuento</th>
-				<th>OPCIONES</th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<%
-			for (Producto p : productos) {
-			%>
-				<tr>
-					<td><%=p.getId() %></td>
-					<td><%=p.getNombre() %></td>
-					<td><%=p.getPrecio() %></td>
-					<td><%=p.getDescuento() %></td>
-					<td>
-						<a class="btn btn-primary" href="adminproducto">Editar</a>
-						<a class="btn btn-danger" href="#">Borrar</a>
-					</td>
-				</tr>
-			<%
-			}
-			%>
-		</tbody>
+	<form>
+		<div class="row mb-3">
+			<label for="id" class="col-sm-2 col-form-label">Id</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="id">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="nombre">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="precio" class="col-sm-2 col-form-label">Precio</label>
+			<div class="col-sm-10">
+				<input type="number" step=".01" class="form-control" id="precio">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="descuento" class="col-sm-2 col-form-label">Descuento</label>
+			<div class="col-sm-10">
+				<input type="number" step=".1" class="form-control" id="descuento">
+			</div>
+		</div>
 		
-		<tfoot>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>
-					<a class="btn btn-primary" href="adminproducto">Añadir</a>
-				</td>
-			</tr>
-		</tfoot>
-	</table>
-
+		<button type="submit" class="btn btn-primary">Guardar</button>
+	</form>
 </body>
 </html>
