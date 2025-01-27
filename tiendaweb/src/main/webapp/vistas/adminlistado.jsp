@@ -36,6 +36,7 @@ ArrayList<Producto> productos = (ArrayList<Producto>) request.getAttribute("prod
 				<th>Nombre</th>
 				<th>Precio</th>
 				<th>Descuento</th>
+				<th>OPCIONES</th>
 			</tr>
 		</thead>
 
@@ -48,11 +49,27 @@ ArrayList<Producto> productos = (ArrayList<Producto>) request.getAttribute("prod
 					<td><%=p.getNombre() %></td>
 					<td><%=p.getPrecio() %></td>
 					<td><%=p.getDescuento() %></td>
+					<td>
+						<a class="btn btn-primary" href="#">Editar</a>
+						<a class="btn btn-danger" href="#">Borrar</a>
+					</td>
 				</tr>
 			<%
 			}
 			%>
 		</tbody>
+		
+		<tfoot>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a class="btn btn-primary" href="#">Añadir</a>
+				</td>
+			</tr>
+		</tfoot>
 	</table>
 
 </body>
