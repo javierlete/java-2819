@@ -20,7 +20,9 @@ ArrayList<Producto> productos = (ArrayList<Producto>) request.getAttribute("prod
 		<%
 		for (Producto p : productos) {
 		%>
-		<li><%= p.getNombre() %>: <%= p.getPrecio() %>€</li>
+		<li><%= p.getNombre() %>: <%= p.getPrecio() %>€
+			<img src="https://picsum.photos/200/150?<%=p.getId()%>" alt="">
+		</li>
 		<%
 		}
 		%>
