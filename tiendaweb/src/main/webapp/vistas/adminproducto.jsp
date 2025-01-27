@@ -3,8 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-@SuppressWarnings("unchecked")
-ArrayList<Producto> productos = (ArrayList<Producto>) request.getAttribute("productos");
+Producto producto = (Producto) request.getAttribute("producto");
 %>
 <!DOCTYPE html>
 <html>
@@ -29,32 +28,34 @@ ArrayList<Producto> productos = (ArrayList<Producto>) request.getAttribute("prod
 
 	<h1 class="display-1">Listado Administración</h1>
 
+	<p><%=producto%></p>
+	
 	<form>
 		<div class="row mb-3">
 			<label for="id" class="col-sm-2 col-form-label">Id</label>
 			<div class="col-sm-10">
-				<input type="number" class="form-control" id="id">
+				<input type="number" class="form-control" id="id" value="<%=producto.getId()%>">
 			</div>
 		</div>
 		<div class="row mb-3">
 			<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="nombre">
+				<input type="text" class="form-control" id="nombre" value="<%=producto.getNombre()%>">
 			</div>
 		</div>
 		<div class="row mb-3">
 			<label for="precio" class="col-sm-2 col-form-label">Precio</label>
 			<div class="col-sm-10">
-				<input type="number" step=".01" class="form-control" id="precio">
+				<input type="number" step=".01" class="form-control" id="precio" value="<%=producto.getPrecio()%>">
 			</div>
 		</div>
 		<div class="row mb-3">
 			<label for="descuento" class="col-sm-2 col-form-label">Descuento</label>
 			<div class="col-sm-10">
-				<input type="number" step=".1" class="form-control" id="descuento">
+				<input type="number" step=".1" class="form-control" id="descuento" value="<%=producto.getDescuento()%>">
 			</div>
 		</div>
-		
+
 		<button type="submit" class="btn btn-primary">Guardar</button>
 	</form>
 </body>

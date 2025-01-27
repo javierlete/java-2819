@@ -50,7 +50,7 @@ ArrayList<Producto> productos = (ArrayList<Producto>) request.getAttribute("prod
 					<td><%=p.getPrecio() %></td>
 					<td><%=p.getDescuento() %></td>
 					<td>
-						<a class="btn btn-primary" href="adminproducto">Editar</a>
+						<a class="btn btn-primary" href="adminproducto?id=<%=p.getId()%>">Editar</a>
 						<a class="btn btn-danger" href="#">Borrar</a>
 					</td>
 				</tr>
