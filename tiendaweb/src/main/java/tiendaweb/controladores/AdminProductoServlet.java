@@ -41,8 +41,8 @@ public class AdminProductoServlet extends HttpServlet {
 						ResultSet rs = st.executeQuery(SQL_SELECT + id)) {
 
 					if (rs.next()) {
-						Producto producto = new Producto(rs.getLong("id"), rs.getString("nombre"), rs.getDouble("precio"),
-								rs.getDouble("descuento"));
+						Producto producto = new Producto(rs.getLong("id"), rs.getString("nombre"),
+								rs.getDouble("precio"), rs.getDouble("descuento"));
 //						Preparar los objetos para la siguiente vista
 						request.setAttribute("producto", producto);
 					}
@@ -55,7 +55,7 @@ public class AdminProductoServlet extends HttpServlet {
 //		Saltar a la siguiente vista
 		request.getRequestDispatcher("vistas/adminproducto.jsp").forward(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 //		Recoger información de la petición
@@ -63,30 +63,37 @@ public class AdminProductoServlet extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String sPrecio = request.getParameter("precio");
 		String sDescuento = request.getParameter("descuento");
-		
+
 //		Convertir la información recibida
-		Long id = Long.parseLong(sId);
+		Long id = sId.isBlank() ? null : Long.parseLong(sId);
 		Double precio = Double.parseDouble(sPrecio);
 		Double descuento = Double.parseDouble(sDescuento);
-		
+
 //		Crear objetos en base a la información recibida
 		Producto producto = new Producto(id, nombre, precio, descuento);
-		
+
 //		Ejecutar lógica de negocio
 		try {
 			Class.forName("org.sqlite.JDBC");
 
-			try (Connection con = DriverManager.getConnection(URL);
-					Statement st = con.createStatement()) {
+			try (Connection con = DriverManager.getConnection(URL); Statement st = con.createStatement()) {
 
-				String sql = String.format(SQL_UPDATE, producto.getNombre(), producto.getPrecio(), producto.getDescuento(), producto.getId());
+				String sql;
+
+				if (id == null) {
+					sql = String.format(SQL_INSERT, producto.getNombre(), producto.getPrecio(), producto.getDescuento());
+				} else {
+					sql = String.format(SQL_UPDATE, producto.getNombre(), producto.getPrecio(), producto.getDescuento(),
+							producto.getId());
+				}
+				
 				st.executeUpdate(sql);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 //		Preparar los objetos para la siguiente vista
 //		Saltar a la siguiente vista
 		response.sendRedirect("adminlistado");
