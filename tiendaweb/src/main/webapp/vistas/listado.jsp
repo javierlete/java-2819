@@ -5,6 +5,9 @@
 <%
 @SuppressWarnings("unchecked")
 ArrayList<Producto> productos = (ArrayList<Producto>) request.getAttribute("productos");
+
+String email = (String) session.getAttribute("email");
+String ip = (String) session.getAttribute("ip");
 %>
 <!DOCTYPE html>
 <html>
@@ -28,6 +31,9 @@ ArrayList<Producto> productos = (ArrayList<Producto>) request.getAttribute("prod
 <body class="container">
 
 	<h1 class="display-1">Listado</h1>
+
+	<h2><%=email %></h2>
+	<h2><%=ip %></h2>
 
 	<div class="row row-cols-1 row-cols-md-3 g-4">
 		<%
