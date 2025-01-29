@@ -27,6 +27,13 @@ public class AdminListadoServlet extends HttpServlet {
 //		Crear objetos en base a la información recibida
 //		Ejecutar lógica de negocio
 		
+		String email = (String)request.getSession().getAttribute("email");
+		
+		if(email == null) {
+			response.sendRedirect("login");
+			return;
+		}
+		
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		
 		try {

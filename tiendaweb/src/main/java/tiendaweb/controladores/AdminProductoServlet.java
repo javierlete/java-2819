@@ -19,7 +19,7 @@ public class AdminProductoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String URL = "jdbc:sqlite:tiendaweb.sqlite";
 	private static final String SQL_SELECT = "SELECT * FROM productos WHERE id=";
-	
+
 	private static final String SQL_INSERT = "INSERT INTO productos (nombre, precio, descuento) VALUES ('%s', %s, %s)";
 	private static final String SQL_UPDATE = "UPDATE productos SET nombre='%s', precio=%s, descuento=%s WHERE id=%s";
 
@@ -31,6 +31,13 @@ public class AdminProductoServlet extends HttpServlet {
 //		Convertir la información recibida
 //		Crear objetos en base a la información recibida
 //		Ejecutar lógica de negocio
+
+		String email = (String) request.getSession().getAttribute("email");
+
+		if (email == null) {
+			response.sendRedirect("login");
+			return;
+		}
 
 		if (id != null) {
 			try {
@@ -81,12 +88,13 @@ public class AdminProductoServlet extends HttpServlet {
 				String sql;
 
 				if (id == null) {
-					sql = String.format(SQL_INSERT, producto.getNombre(), producto.getPrecio(), producto.getDescuento());
+					sql = String.format(SQL_INSERT, producto.getNombre(), producto.getPrecio(),
+							producto.getDescuento());
 				} else {
 					sql = String.format(SQL_UPDATE, producto.getNombre(), producto.getPrecio(), producto.getDescuento(),
 							producto.getId());
 				}
-				
+
 				st.executeUpdate(sql);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
