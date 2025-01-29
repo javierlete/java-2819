@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
 String email = (String) session.getAttribute("email");
 String ip = (String) session.getAttribute("ip");
@@ -23,19 +23,29 @@ String ip = (String) session.getAttribute("ip");
 	crossorigin="anonymous"></script>
 <!-- Fin Bootstrap -->
 </head>
-<body class="container">
-
-	<header>
-		<h2><%=email %></h2>
-		<h2><%=ip %></h2>
-	</header>
-	
-	<nav>
-		<ul>
-			<li><a href="listado">Listado</a></li>
-			<li><a href="adminlistado">Administración listado</a></li>
-			<li><a href="adminproducto">Administración producto</a></li>
-			<li><a href="login">Iniciar sesión</a></li>
-			<li><a href="logout">Cerrar sesión</a></li>
-		</ul>
+<body>
+	<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">TiendaWeb</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="listado">Listado</a></li>
+				</ul>
+				<ul class="navbar-nav mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="adminlistado">Administración</a></li>
+					<li class="nav-item"><a class="nav-link" href="login">Iniciar sesión</a></li>
+					<li class="nav-item"><a class="nav-link" href="logout">Cerrar sesión</a></li>
+					<li class="navbar-text"><%=email %></li>
+					<li class="navbar-text ms-2"><%=ip %></li>
+				</ul>
+			</div>
+		</div>
 	</nav>
+	
+	<main class="container">
