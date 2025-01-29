@@ -38,14 +38,29 @@ String ip = (String) session.getAttribute("ip");
 					<li class="nav-item"><a class="nav-link" href="listado">Listado</a></li>
 				</ul>
 				<ul class="navbar-nav mb-2 mb-lg-0">
+					<%
+					if (email != null) {
+					%>
 					<li class="nav-item"><a class="nav-link" href="adminlistado">Administración</a></li>
-					<li class="nav-item"><a class="nav-link" href="login">Iniciar sesión</a></li>
-					<li class="nav-item"><a class="nav-link" href="logout">Cerrar sesión</a></li>
-					<li class="navbar-text"><%=email %></li>
-					<li class="navbar-text ms-2"><%=ip %></li>
+					<%
+					} else {
+					%>
+					<li class="nav-item"><a class="nav-link" href="login">Iniciar
+							sesión</a></li>
+					<%
+					}
+					if (email != null) {
+					%>
+					<li class="nav-item"><a class="nav-link" href="logout">Cerrar
+							sesión</a></li>
+					<li class="navbar-text"><%=email%></li>
+					<li class="navbar-text ms-2"><%=ip%></li>
+					<%
+					}
+					%>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	
+
 	<main class="container">
