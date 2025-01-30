@@ -1,8 +1,9 @@
+<%@page import="tiendaweb.modelos.Usuario"%>
+<%@page import="tiendaweb.controladores.Autorizacion"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-String email = (String) session.getAttribute("email");
-String ip = (String) session.getAttribute("ip");
+Usuario usuario = (Usuario) session.getAttribute("usuario");
 %>
 <!DOCTYPE html>
 <html>
@@ -39,22 +40,21 @@ String ip = (String) session.getAttribute("ip");
 				</ul>
 				<ul class="navbar-nav mb-2 mb-lg-0">
 					<%
-					if (email != null) {
+					if (Autorizacion.esAdmin(request)) {
 					%>
 					<li class="nav-item"><a class="nav-link" href="adminlistado">Administración</a></li>
 					<%
-					} else {
+					}
+					if (!Autorizacion.estaAutenticado(request)) {
 					%>
 					<li class="nav-item"><a class="nav-link" href="login">Iniciar
 							sesión</a></li>
 					<%
-					}
-					if (email != null) {
+					} else {
 					%>
+					<li class="navbar-text"><%=usuario.getEmail()%> <%=usuario.getRol()%></li>
 					<li class="nav-item"><a class="nav-link" href="logout">Cerrar
 							sesión</a></li>
-					<li class="navbar-text"><%=email%></li>
-					<li class="navbar-text ms-2"><%=ip%></li>
 					<%
 					}
 					%>

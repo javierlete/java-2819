@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import tiendaweb.accesodatos.UsuarioDao;
+import tiendaweb.modelos.Usuario;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -25,12 +27,14 @@ public class LoginServlet extends HttpServlet {
 //		Convertir la información recibida
 //		Crear objetos en base a la información recibida
 //		Ejecutar lógica de negocio
-		if("javier@email.net".equals(email) && "contra".equals(password)) {
+		
+		Usuario usuario = UsuarioDao.obtenerPorEmail(email);
+		
+		if(usuario != null && usuario.getPassword().equals(password)) {
 			HttpSession session = request.getSession();
 			
 //			Preparar los objetos para la siguienteS vistaS
-			session.setAttribute("email", email);
-			session.setAttribute("ip", request.getRemoteAddr());
+			session.setAttribute("usuario", usuario);
 //			Saltar a la siguiente vista
 			response.sendRedirect("listado");
 		} else {
