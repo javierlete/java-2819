@@ -2,6 +2,7 @@ package tiendaweb.controladores;
 
 import java.io.IOException;
 
+import bibliotecas.Encriptacion;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,7 +31,9 @@ public class LoginServlet extends HttpServlet {
 		
 		Usuario usuario = UsuarioDao.obtenerPorEmail(email);
 		
-		if(usuario != null && usuario.getPassword().equals(password)) {
+		String passwordEncriptada = Encriptacion.encryptPassword(password);
+		
+		if(usuario != null && usuario.getPassword().equals(passwordEncriptada)) {
 			HttpSession session = request.getSession();
 			
 //			Preparar los objetos para la siguienteS vistaS
