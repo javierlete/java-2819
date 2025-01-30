@@ -15,6 +15,7 @@ public class AdminBorrarServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		if (Autorizacion.esAdmin(request, response)) {
 //		Recoger información de la petición
 		String sId = request.getParameter("id");
 
@@ -28,5 +29,6 @@ public class AdminBorrarServlet extends HttpServlet {
 //		Preparar los objetos para la siguiente vista
 //		Saltar a la siguiente vista
 		response.sendRedirect("adminlistado");
+		}
 	}
 }

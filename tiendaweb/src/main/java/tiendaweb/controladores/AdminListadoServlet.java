@@ -14,26 +14,22 @@ import tiendaweb.modelos.Producto;
 @WebServlet("/adminlistado")
 public class AdminListadoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Recoger información de la petición
-//		Convertir la información recibida
-//		Crear objetos en base a la información recibida
-//		Ejecutar lógica de negocio
-		
-		String email = (String)request.getSession().getAttribute("email");
-		
-		if(email == null) {
-			response.sendRedirect("login");
-			return;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		if (Autorizacion.esAdmin(request, response)) {
+//			Recoger información de la petición
+//			Convertir la información recibida
+//			Crear objetos en base a la información recibida
+//			Ejecutar lógica de negocio
+
+			ArrayList<Producto> productos = ProductoDao.obtenerProductos();
+
+//			Preparar los objetos para la siguiente vista
+			request.setAttribute("productos", productos);
+
+//			Saltar a la siguiente vista
+			request.getRequestDispatcher("vistas/adminlistado.jsp").forward(request, response);
 		}
-		
-		ArrayList<Producto> productos = ProductoDao.obtenerProductos();
-		
-//		Preparar los objetos para la siguiente vista
-		request.setAttribute("productos", productos);
-		
-//		Saltar a la siguiente vista
-		request.getRequestDispatcher("vistas/adminlistado.jsp").forward(request, response);
 	}
 }
