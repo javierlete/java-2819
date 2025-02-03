@@ -3,8 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-@SuppressWarnings("unchecked")
-ArrayList<Cita> citas = (ArrayList<Cita>) request.getAttribute("citas");
+Cita cita = (Cita) request.getAttribute("cita");
 %>
 <!doctype html>
 <html lang="es">
@@ -19,25 +18,21 @@ ArrayList<Cita> citas = (ArrayList<Cita>) request.getAttribute("citas");
 	crossorigin="anonymous">
 </head>
 <body>
-	<table class="table table-bordered">
-		<tbody>
-			<%
-			for (Cita cita : citas) {
-			%>
-			<tr>
-				<td><a href="cita?id=<%=cita.getId()%>"> <%=cita.getAsunto()%>
-				</a></td>
-				<td><%=cita.getInicio()%></td>
-				<td><%=cita.getFin()%></td>
-				<td><%=cita.getDescripcion()%></td>
-				<td><%=cita.getPrioridad()%></td>
-				<td><%=cita.getUsuario().getNombre()%></td>
-			</tr>
-			<%
-			}
-			%>
-		</tbody>
-	</table>
+	<div class="card" style="width: 18rem;">
+		<div class="card-body">
+			<h5 class="card-title"><%=cita.getAsunto()%></h5>
+			<p class="card-text"><%=cita.getDescripcion()%></p>
+		</div>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item"><%=cita.getInicio()%></li>
+			<li class="list-group-item"><%=cita.getFin()%></li>
+			<li class="list-group-item"><%=cita.getPrioridad()%></li>
+		</ul>
+		<div class="card-body">
+			<a href="#"
+				class="card-link"><%=cita.getUsuario().getNombre()%></a>
+		</div>
+	</div>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
