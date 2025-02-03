@@ -30,7 +30,7 @@ ArrayList<Cita> citas = (ArrayList<Cita>) request.getAttribute("citas");
 				<td><%=cita.getFin()%></td>
 				<td><%=cita.getDescripcion()%></td>
 				<td><%=cita.getPrioridad()%></td>
-				<td><%=cita.getUsuario().getId()%></td>
+				<td><%=cita.getUsuario().getNombre()%></td>
 			</tr>
 			<%
 			}
