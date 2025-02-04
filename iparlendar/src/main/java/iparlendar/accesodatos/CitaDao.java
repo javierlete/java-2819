@@ -34,6 +34,8 @@ public class CitaDao {
 				id=%s
 			""";
 
+	private static final String SQL_BORRAR = "DELETE FROM citas WHERE id=";
+
 	public static ArrayList<Cita> obtenerTodas() {
 		try (Statement st = Globales.BASE_DE_DATOS.obtenerSentencia(); ResultSet rs = st.executeQuery(SQL_SELECT)) {
 			ArrayList<Cita> citas = new ArrayList<Cita>();
@@ -125,6 +127,16 @@ public class CitaDao {
 
 		} catch (SQLException e) {
 			throw new RuntimeException("Error al modificar la cita " + cita, e);
+		}
+	}
+
+	public static void borrar(Long id) {
+		try (Statement st = Globales.BASE_DE_DATOS.obtenerSentencia()) {
+
+			st.executeUpdate(SQL_BORRAR + id);
+
+		} catch (SQLException e) {
+			throw new RuntimeException("Error al borrar la cita " + id, e);
 		}
 	}
 }
