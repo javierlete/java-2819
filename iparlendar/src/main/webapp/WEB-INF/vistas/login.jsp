@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/vistas/includes/cabecera.jsp"%>
 
+<%
+String error = (String) request.getAttribute("error");
+%>
+
 <h1>Login</h1>
 
 <form class="container" method="post">
@@ -19,6 +23,8 @@
 	</div>
 
 	<button type="submit" class="btn btn-primary">Iniciar sesión</button>
+	
+	<div class="text-danger"><%=error %></div>
 </form>
 
-<%@ include file="/WEB-INF/vistas/includes/cabecera.jsp"%>
+<%@ include file="/WEB-INF/vistas/includes/pie.jsp"%>

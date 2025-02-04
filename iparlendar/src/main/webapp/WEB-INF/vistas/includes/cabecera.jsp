@@ -3,6 +3,9 @@
 <%@page import="iparlendar.modelos.Usuario"%>
 <%@page import="iparlendar.modelos.Cita"%>
 <%@page import="java.util.ArrayList"%>
+<%
+Usuario usuarioLogin = (Usuario) session.getAttribute("usuario");
+%>
 <!doctype html>
 <html lang="es">
 <head>
@@ -16,3 +19,36 @@
 	crossorigin="anonymous">
 </head>
 <body>
+
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="citas">Iparlendar</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="citas">Citas</a></li>
+				</ul>
+				<ul class="navbar-nav mb-2 mb-lg-0">
+					<%
+					if (usuarioLogin == null) {
+					%>
+					<li class="nav-item"><a class="nav-link" href="login">Iniciar
+							sesión</a></li>
+					<%
+					} else {
+					%>
+					<li class="navbar-text"><%=usuarioLogin.getNombre()%></li>
+					<li class="nav-item"><a class="nav-link" href="logout">Cerrar
+							sesión</a></li>
+					<%
+					}
+					%>
+				</ul>
+			</div>
+		</div>
+	</nav>
