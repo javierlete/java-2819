@@ -6,18 +6,11 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import bibliotecas.BaseDeDatos;
 import iparlendar.modelos.Cita;
 import iparlendar.modelos.Usuario;
 
 public class CitaDao {
-	private static String DRIVER = "org.sqlite.JDBC";
-	private static String URL = "jdbc:sqlite:iparlendar.sqlite";
-	private static String USER = "";
-	private static String PASS = "";
-
-	private static BaseDeDatos baseDeDatos = new BaseDeDatos(DRIVER, URL, USER, PASS);
-
+	
 	private static String SQL_SELECT = """
 			SELECT *
 			FROM citas, usuarios
@@ -26,7 +19,7 @@ public class CitaDao {
 	private static final String SQL_SELECT_ID = SQL_SELECT + " AND citas.id=";
 
 	public static ArrayList<Cita> obtenerTodas() {
-		try (Statement st = baseDeDatos.obtenerSentencia(); ResultSet rs = st.executeQuery(SQL_SELECT)) {
+		try (Statement st = Globales.BASE_DE_DATOS.obtenerSentencia(); ResultSet rs = st.executeQuery(SQL_SELECT)) {
 			ArrayList<Cita> citas = new ArrayList<Cita>();
 
 			while (rs.next()) {
@@ -60,7 +53,7 @@ public class CitaDao {
 	}
 
 	public static Cita obtenerPorId(Long id) {
-		try (Statement st = baseDeDatos.obtenerSentencia(); ResultSet rs = st.executeQuery(SQL_SELECT_ID + id)) {
+		try (Statement st = Globales.BASE_DE_DATOS.obtenerSentencia(); ResultSet rs = st.executeQuery(SQL_SELECT_ID + id)) {
 
 			Cita cita = null;
 			
