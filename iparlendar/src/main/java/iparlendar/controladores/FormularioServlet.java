@@ -20,6 +20,22 @@ public class FormularioServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String sId = request.getParameter("id");
+
+		Cita cita;
+
+		if (sId != null) {
+			Long id = Long.parseLong(sId);
+
+			cita = CitaDao.obtenerPorId(id);
+
+		} else {
+			cita = new Cita(0L, "", LocalDateTime.now(), LocalDateTime.now(), "", "",
+					new Usuario(null, null, null, null, null, null));
+		}
+
+		request.setAttribute("cita", cita);
+
 		ArrayList<Usuario> usuarios = UsuarioDao.obtenerTodos();
 
 		request.setAttribute("usuarios", usuarios);
@@ -28,25 +44,30 @@ public class FormularioServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		String sId = request.getParameter("id");
+		String sId = request.getParameter("id");
 		String asunto = request.getParameter("asunto");
 		String sInicio = request.getParameter("inicio");
 		String sFin = request.getParameter("fin");
 		String prioridad = request.getParameter("prioridad");
 		String sUsuarioId = request.getParameter("usuario");
 		String descripcion = request.getParameter("descripcion");
-		
-		Long id = null; //Long.parseLong("id");
+
+		Long id = Long.parseLong(sId);
 		LocalDateTime inicio = LocalDateTime.parse(sInicio);
 		LocalDateTime fin = LocalDateTime.parse(sFin);
 		Long usuarioId = Long.parseLong(sUsuarioId);
-		
+
 		Usuario usuario = new Usuario(usuarioId, null, null, null, null, null);
-		
+
 		Cita cita = new Cita(id, asunto, inicio, fin, prioridad, descripcion, usuario);
+
+		if(id == 0) {
+			CitaDao.insertar(cita);
+		} else {
+			CitaDao.modificar(cita);
+		}
 		
-		CitaDao.insertar(cita);
-		
+
 		response.sendRedirect("citas");
 	}
 }

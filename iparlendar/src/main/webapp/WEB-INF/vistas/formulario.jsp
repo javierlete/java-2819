@@ -4,6 +4,8 @@
 <%
 @SuppressWarnings("unchecked")
 ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuarios");
+
+Cita cita = (Cita) request.getAttribute("cita");
 %>
 
 <h1>Cita</h1>
@@ -12,35 +14,35 @@ ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuario
 	<div class="row mb-3">
 		<label for="id" class="col-sm-2 col-form-label">Id</label>
 		<div class="col-sm-10">
-			<input type="number" class="form-control" id="id" name="id">
+			<input type="number" class="form-control" id="id" name="id" value="<%=cita.getId()%>">
 		</div>
 	</div>
 	<div class="row mb-3">
 		<label for="asunto" class="col-sm-2 col-form-label">Asunto</label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control" id="asunto" name="asunto">
+			<input type="text" class="form-control" id="asunto" name="asunto" value="<%=cita.getAsunto()%>">
 		</div>
 	</div>
 	<div class="row mb-3">
 		<label for="inicio" class="col-sm-2 col-form-label">Inicio</label>
 		<div class="col-sm-10">
 			<input type="datetime-local" class="form-control" id="inicio"
-				name="inicio">
+				name="inicio" value="<%=cita.getInicio()%>">
 		</div>
 	</div>
 	<div class="row mb-3">
 		<label for="fin" class="col-sm-2 col-form-label">Fin</label>
 		<div class="col-sm-10">
-			<input type="datetime-local" class="form-control" id="fin" name="fin">
+			<input type="datetime-local" class="form-control" id="fin" name="fin" value="<%=cita.getFin()%>">
 		</div>
 	</div>
 	<div class="row mb-3">
 		<label for="prioridad" class="col-sm-2 col-form-label">Prioridad</label>
 		<div class="col-sm-10">
 			<select class="form-select" id="prioridad" name="prioridad">
-				<option>ALTA</option>
-				<option>MEDIA</option>
-				<option>BAJA</option>
+				<option <%=cita.getPrioridad().equals("ALTA") ? "selected" : "" %>>ALTA</option>
+				<option <%=cita.getPrioridad().equals("MEDIA") ? "selected" : "" %>>MEDIA</option>
+				<option <%=cita.getPrioridad().equals("BAJA") ? "selected" : "" %>>BAJA</option>
 			</select>
 		</div>
 	</div>
@@ -51,7 +53,7 @@ ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuario
 				<%
 				for (Usuario usuario : usuarios) {
 				%>
-				<option value="<%=usuario.getId()%>"><%=usuario.getNombre() %></option>
+				<option <%=cita.getUsuario().getId() == usuario.getId() ? "selected" : "" %> value="<%=usuario.getId()%>"><%=usuario.getNombre() %></option>
 				<%
 				}
 				%>
@@ -62,7 +64,7 @@ ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuario
 		<label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
 		<div class="col-sm-10">
 			<textarea rows="5" class="form-control" id="descripcion"
-				name="descripcion"></textarea>
+				name="descripcion"><%=cita.getDescripcion()%></textarea>
 		</div>
 	</div>
 

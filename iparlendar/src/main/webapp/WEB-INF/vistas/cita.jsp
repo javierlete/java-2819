@@ -15,9 +15,10 @@ Cita cita = (Cita) request.getAttribute("cita");
 			<li class="list-group-item"><%=cita.getFin()%></li>
 			<li class="list-group-item"><%=cita.getPrioridad()%></li>
 		</ul>
-		<div class="card-body">
+		<div class="card-body d-flex justify-content-between align-items-baseline">
 			<a href="#"
 				class="card-link"><%=cita.getUsuario().getNombre()%></a>
+			<a href="formulario?id=<%=cita.getId() %>" class="btn btn-primary">Editar</a>
 		</div>
 	</div>
 
