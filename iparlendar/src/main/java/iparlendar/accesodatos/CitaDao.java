@@ -16,8 +16,11 @@ public class CitaDao {
 			FROM citas, usuarios
 			WHERE usuarios_id = usuarios.id
 			""";
+	
 	private static final String SQL_SELECT_ID = SQL_SELECT + " AND citas.id=";
 
+	private static final String SQL_INSERT = "INSERT INTO citas (asunto, inicio, fin, prioridad, descripcion, usuarios_id) VALUES ('%s', '%s', '%s', '%s', '%s', %s)";
+	
 	public static ArrayList<Cita> obtenerTodas() {
 		try (Statement st = Globales.BASE_DE_DATOS.obtenerSentencia(); ResultSet rs = st.executeQuery(SQL_SELECT)) {
 			ArrayList<Cita> citas = new ArrayList<Cita>();
@@ -82,6 +85,17 @@ public class CitaDao {
 			
 			return cita;
 
+		} catch (SQLException e) {
+			throw new RuntimeException("Error en la búsqueda de todas las citas", e);
+		}
+	}
+
+	public static void insertar(Cita cita) {
+		try (Statement st = Globales.BASE_DE_DATOS.obtenerSentencia()) {
+
+			String sql = String.format(SQL_INSERT, cita.getAsunto(), cita.getInicio(), cita.getFin(), cita.getPrioridad(), cita.getDescripcion(), cita.getUsuario().getId());
+			st.executeUpdate(sql);
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("Error en la búsqueda de todas las citas", e);
 		}
