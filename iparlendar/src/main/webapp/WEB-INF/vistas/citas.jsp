@@ -30,7 +30,7 @@ ArrayList<Cita> citas = (ArrayList<Cita>) request.getAttribute("citas");
 		<tfoot>
 			<tr>
 				<td>
-					<a href="formulario">Añadir cita</a>
+					<a class="btn btn-primary" href="formulario">Añadir cita</a>
 				</td>
 				<td></td>
 				<td></td>
